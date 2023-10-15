@@ -20,6 +20,11 @@ abstract class AbstractBee implements AttackableObjectInterface
     protected int $lifeCost;
 
     /**
+     * @var string
+     */
+    protected string $beeType;
+
+    /**
      * @param int $beeId Always set up a bee with an Id
      */
     public function __construct(int $beeId)
