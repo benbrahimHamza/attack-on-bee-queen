@@ -51,9 +51,17 @@ abstract class AbstractBee implements AttackableObjectInterface
     /**
      * @param int $lifePoints
      */
-    private function setLifePoints(int $lifePoints): void
+    public function setLifePoints(int $lifePoints): void
     {
         $this->lifePoints = $lifePoints;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBeeType(): string
+    {
+        return $this->beeType;
     }
     
     /**
@@ -82,11 +90,17 @@ abstract class AbstractBee implements AttackableObjectInterface
         if ($this->lifePoints < $this->lifeCost)
         {
             $this->die();
+            return ;
         }
         
         $newLifeValue = $this->lifePoints - $this->lifeCost;
 
         $this->setLifePoints($newLifeValue);
+    }
+
+    public function __toString()
+    {
+        return '<p>' . $this->getBeeType() . $this->getBeeId() . ' ' . $this->getLifePoints() . '</p>';
     }
 
 }
