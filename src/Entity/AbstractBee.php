@@ -4,6 +4,12 @@ namespace App\Entity;
 
 abstract class AbstractBee implements AttackableObjectInterface
 {
+    const QUEEN = 'Queen';
+    const WORKER = 'Worker';
+    const SCOUT = 'Scout';
+
+    const ALIVE = 1;
+    const DEAD = 0;
     /**
      * @var int
      */
@@ -25,11 +31,17 @@ abstract class AbstractBee implements AttackableObjectInterface
     protected string $beeType;
 
     /**
+     * @var int
+     */
+    protected int $beeStatus;
+
+    /**
      * @param int $beeId Always set up a bee with an Id
      */
     public function __construct(int $beeId)
     {
         $this->beeId = $beeId;
+        $this->beeStatus = self::ALIVE;
     }
 
     /**
@@ -80,20 +92,29 @@ abstract class AbstractBee implements AttackableObjectInterface
         $this->lifeCost= $lifeCost;
     }
 
+    /**
+     * @return int 
+     */
+    public function getBeeStatus(): int
+    {
+        return $this->beeStatus;
+    }
+
     public function die(): void
     {
         $this->lifePoints = 0;
+        $this->beeStatus = self::DEAD;
     }
 
     public function takeDamage(): void
     {
-        if ($this->lifePoints < $this->lifeCost)
+        $newLifeValue = $this->lifePoints - $this->lifeCost;
+        
+        if ($newLifeValue <= 0)
         {
             $this->die();
             return ;
         }
-        
-        $newLifeValue = $this->lifePoints - $this->lifeCost;
 
         $this->setLifePoints($newLifeValue);
     }

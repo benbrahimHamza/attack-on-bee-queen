@@ -19,7 +19,7 @@ class WorkerBee extends AbstractBee implements SplObserver
     /**
      * @var string
      */
-    protected string $beeType = "Worker";
+    protected string $beeType = parent::WORKER;
 
     public function update(\SplSubject $subject): void
     {

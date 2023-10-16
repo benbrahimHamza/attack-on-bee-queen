@@ -19,7 +19,7 @@ class QueenBee extends AbstractBee implements \SplSubject
     /**
      * @var string
      */
-    protected string $beeType = "Queen";
+    protected string $beeType = parent::QUEEN;
 
     /**
      * @var array

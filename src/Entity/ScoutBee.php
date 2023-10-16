@@ -20,7 +20,7 @@ class ScoutBee extends AbstractBee implements SplObserver
     /**
      * @var string
      */
-    protected string $beeType = "Scout";
+    protected string $beeType = parent::SCOUT;
 
     public function update(\SplSubject $subject): void
     {
