@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Attack on Bee Queen</title>
+        <link rel="stylesheet" href="src/styles/main.css">
     </head>
     <body>
         <div id="historyContainer">
