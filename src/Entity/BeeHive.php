@@ -16,16 +16,21 @@ class BeeHive
 
     public function __construct()
     {
-        $this->beePopulation[]= new QueenBee(1);
+        $newQueenBee = new QueenBee(1);
+        $this->beePopulation[]= $newQueenBee;
 
         for ($i = 0; $i < self::WORKERBEE_COUNT; $i++)
         {
-            $this->beePopulation[]= new WorkerBee($i + 1);
+            $newWokerBee = new WorkerBee($i + 1);
+            $newQueenBee->attach($newWokerBee);
+            $this->beePopulation[]= $newWokerBee;
         }
 
         for ($i = 0; $i < self::SCOUTBEE_COUNT; $i++)
         {
-            $this->beePopulation[]= new ScoutBee($i + 1);
+            $newScoutBee = new ScoutBee($i + 1);
+            $newQueenBee->attach($newScoutBee);
+            $this->beePopulation[]= $newScoutBee;
         }
     }
 

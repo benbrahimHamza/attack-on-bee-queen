@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
-class QueenBee extends AbstractBee
+use SplObserver;
+
+class QueenBee extends AbstractBee implements \SplSubject
 {
     /**
      * @var int
@@ -18,4 +20,38 @@ class QueenBee extends AbstractBee
      * @var string
      */
     protected string $beeType = "Queen";
+
+    /**
+     * @var array
+     */
+    private $observers = array();
+
+    public function die(): void
+    {
+        $this->lifePoints = 0;
+        $this->notify();
+    }
+
+    //add observer
+    public function attach(SplObserver $observer): void
+    {
+        $this->observers[] = $observer;
+    }
+    
+    //remove observer
+    public function detach(SplObserver $observer): void
+    {
+        $key = array_search($observer,$this->observers, true);
+        if($key){
+            unset($this->observers[$key]);
+        }
+    }
+
+    //notify observers(or some of them)
+    public function notify(): void
+    {
+        foreach ($this->observers as $value) {
+            $value->update($this);
+        }
+    }
 }

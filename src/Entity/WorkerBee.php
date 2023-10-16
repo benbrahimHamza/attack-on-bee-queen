@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
-class WorkerBee extends AbstractBee
+use SplObserver;
+
+class WorkerBee extends AbstractBee implements SplObserver
 {
     /**
      * @var int
@@ -18,4 +20,9 @@ class WorkerBee extends AbstractBee
      * @var string
      */
     protected string $beeType = "Worker";
+
+    public function update(\SplSubject $subject): void
+    {
+        $this->die();
+    }
 }

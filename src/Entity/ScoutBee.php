@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
-class ScoutBee extends AbstractBee
+use SplObserver;
+use SplSubject;
+
+class ScoutBee extends AbstractBee implements SplObserver
 {
     /**
      * @var int
@@ -18,4 +21,9 @@ class ScoutBee extends AbstractBee
      * @var string
      */
     protected string $beeType = "Scout";
+
+    public function update(\SplSubject $subject): void
+    {
+        $this->die();
+    }
 }
