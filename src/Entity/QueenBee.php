@@ -28,7 +28,7 @@ class QueenBee extends AbstractBee implements \SplSubject
 
     public function die(): void
     {
-        $this->lifePoints = 0;
+        parent::die();
         $this->notify();
     }
 
